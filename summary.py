@@ -101,12 +101,11 @@ def create_html_summary():
         files.append(fname)
 
     dirname = os.path.dirname(os.path.realpath(__file__))
-    print dirname
     # render the html with info we collected
     html = template.render(dirname=dirname+'/', files=files)
 
     # write the rendered html
-    webpage = open('image_summary.html', 'w')
+    webpage = open(dirname + '/image_summary.html', 'w')
     webpage.write(html)
     webpage.close()
 
