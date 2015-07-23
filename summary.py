@@ -105,9 +105,11 @@ def create_html_summary(input_directory):
     html = template.render(dirname=input_directory, files=files)
 
     # write the rendered html
-    webpage = open('image_summary.html', 'w')
+    htmlname = 'image_summary.html'
+    webpage = open(htmlname, 'w')
     webpage.write(html)
     webpage.close()
+    print 'wrote', htmlname
 
 if __name__ == '__main__':
     ARGS = get_command_line_args(sys.argv)
