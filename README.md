@@ -1,2 +1,2 @@
 # summary
-An html summary page generator for GBT Pipeline images
+Html summary page generator for GBT Pipeline images
