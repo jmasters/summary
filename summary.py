@@ -84,13 +84,14 @@ def create_images(directory):
         plt.close()
 
 
-def create_html_summary():
+def create_html_summary(input_directory):
     """Write an HTML file that shows all the images
 
     """
 
     # read in the template html
-    html_fd = open('summary_template.html', 'r')
+    dirname = os.path.dirname(os.path.realpath(__file__))
+    html_fd = open(dirname + '/summary_template.html', 'r')
     rawhtml = html_fd.readlines()
     rawhtml = ''.join(rawhtml)
     template = Template(rawhtml)
@@ -100,16 +101,15 @@ def create_html_summary():
     for fname in glob.glob('images/*cont.png'):
         files.append(fname)
 
-    dirname = os.path.dirname(os.path.realpath(__file__))
     # render the html with info we collected
-    html = template.render(dirname=dirname+'/', files=files)
+    html = template.render(dirname=input_directory, files=files)
 
     # write the rendered html
-    webpage = open(dirname + '/image_summary.html', 'w')
+    webpage = open('image_summary.html', 'w')
     webpage.write(html)
     webpage.close()
 
 if __name__ == '__main__':
     ARGS = get_command_line_args(sys.argv)
     create_images(ARGS.directory)
-    create_html_summary()
+    create_html_summary(ARGS.directory)
