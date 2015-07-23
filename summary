@@ -1,0 +1,18 @@
+#!/bin/bash
+
+unset PYTHONPATH
+
+fullpath=`readlink -f $0`
+pathdir=`dirname $fullpath`
+
+source /home/scratch/jmasters/virtualenvs/summary/bin/activate
+
+STAT_FILE="/home/scratch/pipeline/summary-tool.log"
+if [ -w $STAT_FILE ]; then
+    echo `whoami`,`date`,`uname -n`,`pwd`,$fullpath $* >> $STAT_FILE
+fi
+
+PYTHONPATH=${pathdir}
+export PYTHONPATH
+
+python ${pathdir}/summary.py $*
